@@ -11,27 +11,129 @@ st.set_page_config(
 # ---------- Theme ----------
 st.markdown("""
 <style>
-    .stApp { background: linear-gradient(180deg, #f5faf7 0%, #fbfcfa 45%, #ffffff 100%); }
-    [data-testid="stSidebar"] { background: #edf5ef; }
+    :root {
+        --ink: #344054;
+        --muted: #737b8c;
+        --sage: #7d9f91;
+        --deep-sage: #466f60;
+        --lavender: #b7a6d9;
+        --peach: #f2bda7;
+        --butter: #f4dfa0;
+        --paper: #fffdf9;
+    }
+    .stApp {
+        background:
+          radial-gradient(ellipse at 8% 0%, rgba(242,189,167,.22), transparent 32%),
+          radial-gradient(ellipse at 92% 5%, rgba(183,166,217,.22), transparent 30%),
+          linear-gradient(180deg, #fbf8f4 0%, #f7f8f5 48%, #fffdf9 100%);
+        color: var(--ink);
+    }
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #eee8f7 0%, #f5e9e3 54%, #e8f1eb 100%);
+        border-right: 1px solid rgba(110, 105, 135, .12);
+    }
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2 {
+        color: #4d456c;
+        letter-spacing: -.03em;
+    }
+    [data-testid="stSidebar"] [data-testid="stRadio"] label {
+        border-radius: 12px;
+    }
     .hero {
-        padding: 1.7rem 1.8rem; border-radius: 22px;
-        background: linear-gradient(120deg, #dcefe2, #f0f6df);
-        border: 1px solid #d3e6d7; margin-bottom: 1rem;
+        position: relative;
+        overflow: hidden;
+        padding: 1.8rem 1.9rem;
+        border-radius: 24px;
+        background: linear-gradient(118deg, #e3eee6 0%, #f8e8df 48%, #eee7f8 100%);
+        border: 1px solid rgba(125, 159, 145, .25);
+        box-shadow: 0 10px 30px rgba(83, 88, 100, .06);
+        margin-bottom: 1.15rem;
     }
-    .hero h1 { margin: 0; color: #214b38; font-size: 2.25rem; }
-    .hero p { color: #426351; margin: .5rem 0 0 0; font-size: 1.02rem; }
+    .hero:after {
+        content: "✿";
+        position: absolute;
+        right: 1.5rem;
+        top: -.9rem;
+        font-size: 6.5rem;
+        color: rgba(255,255,255,.55);
+        transform: rotate(14deg);
+        pointer-events: none;
+    }
+    .hero h1 {
+        margin: 0;
+        color: #3d5f52;
+        font-size: 2.35rem;
+        letter-spacing: -.045em;
+    }
+    .hero p {
+        color: #626b76;
+        margin: .55rem 0 0 0;
+        font-size: 1.03rem;
+        line-height: 1.7;
+    }
     .mini-card {
-        background: white; border: 1px solid #e0eae2; border-radius: 16px;
-        padding: 1rem 1.1rem; min-height: 135px;
+        background: rgba(255,255,255,.88);
+        border: 1px solid #ebe5e3;
+        border-radius: 19px;
+        padding: 1.05rem 1.1rem;
+        min-height: 150px;
+        box-shadow: 0 7px 22px rgba(70, 73, 84, .045);
+        transition: transform .18s ease, box-shadow .18s ease;
     }
-    .mini-card h3 { color: #285640; margin-top: .2rem; }
-    .muted { color: #607568; font-size: .9rem; }
+    .mini-card h3 {
+        color: #4b5f58;
+        margin-top: .35rem;
+        letter-spacing: -.02em;
+    }
+    .mini-card p {
+        color: #727b86;
+        line-height: 1.6;
+    }
+    .muted { color: var(--muted); font-size: .9rem; }
     .notice {
-        border-left: 4px solid #80ad8b; background: #f0f7f1;
-        padding: .8rem 1rem; border-radius: 8px; color: #355643;
+        border-left: 4px solid #dca68f;
+        background: linear-gradient(100deg, #fff0e8, #f8f0fb);
+        padding: .9rem 1rem;
+        border-radius: 10px;
+        color: #675b68;
     }
-    .small-label { color: #50715e; font-weight: 600; }
-    div.stButton > button { border-radius: 12px; }
+    .small-label { color: #647f73; font-weight: 600; }
+    h1, h2, h3 { letter-spacing: -.025em; }
+    [data-testid="stMetric"] {
+        background: rgba(255,255,255,.75);
+        border: 1px solid #ece7e5;
+        border-radius: 16px;
+        padding: 12px 15px;
+    }
+    [data-testid="stExpander"] {
+        border: 1px solid #e9e3e8;
+        border-radius: 14px;
+        background: rgba(255,255,255,.7);
+    }
+    div.stButton > button, div.stFormSubmitButton > button {
+        border-radius: 13px;
+        border: 1px solid #c9d9cf;
+        background: linear-gradient(110deg, #e5f0e8, #f5e9e4);
+        color: #3d5f52;
+        font-weight: 650;
+        transition: all .18s ease;
+    }
+    div.stButton > button:hover, div.stFormSubmitButton > button:hover {
+        border-color: #b7a6d9;
+        color: #4d456c;
+        box-shadow: 0 5px 14px rgba(105, 91, 130, .12);
+        transform: translateY(-1px);
+    }
+    div[data-baseweb="select"] > div, div[data-baseweb="input"] > div,
+    div[data-baseweb="textarea"] > div {
+        border-radius: 12px;
+        border-color: #e2dce7;
+        background-color: rgba(255,255,255,.85);
+    }
+    div[data-testid="stAlert"] {
+        border-radius: 13px;
+    }
+    hr { border-color: rgba(151, 143, 164, .2); }
 </style>
 """, unsafe_allow_html=True)
 
