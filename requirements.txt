@@ -6,3 +6,5 @@ pandas
 plotly
 
 streamlit>=1.36,<2.0
+
+streamlit
